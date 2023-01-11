@@ -9,4 +9,5 @@ services:
       target: development
     image: skyraptor/spdl
     volumes:
-      - '.:/app'
+      - '.:/dist'
+      - './data:/data'

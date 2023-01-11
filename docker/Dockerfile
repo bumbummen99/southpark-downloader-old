@@ -17,12 +17,11 @@ RUN curl -L \
     --output /usr/local/bin/youtube-dl
 
 # Install custom FFMPEG build for YouTube-DL(P)
-RUN curl -L \
-    https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz \
-    --output ffmpeg.tar.xz && \
-    tar -xf ffmpeg.tar.xz --strip 1 bin && \
-    mv bin/* /usr/local/bin/ && \
-    rm -R bin
+RUN mkdir ffmpeg-download && \
+    curl -L https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz --output ffmpeg-download/ffmpeg.tar.xz && \
+    tar -xf ffmpeg-download/ffmpeg.tar.xz --strip 1 -C ffmpeg-download && \
+    mv ffmpeg-download/bin/* /usr/local/bin/ && \
+    rm -R ffmpeg-download
 
 # Create application diectory
 RUN mkdir /app
