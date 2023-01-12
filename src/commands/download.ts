@@ -1,5 +1,6 @@
 import { Command, Flags } from '@oclif/core'
 import Database from '../database'
+import { parseFilterString } from '../util'
 
 export default class Download extends Command {
   static description = 'Downloads episodes from southpark.de'
@@ -16,11 +17,7 @@ export default class Download extends Command {
     const {flags} = await this.parse(Download)
 
     /* Generate filters if they are provided */
-    const filters: EpisodesFilter[] = []
-    if (flags.filter) {
-      /* Process all filters split by the delimiter */
-      
-    }
+    const filters: EpisodesFilter[] = flags.filter ? parseFilterString(flags.filter) : []
 
     /* Filter database by provided arguments */
     const episodes = (new Database()).getEpisodes(episode => {
