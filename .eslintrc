@@ -2,5 +2,9 @@
   "extends": [
     "oclif",
     "oclif-typescript"
-  ]
+  ],
+  "rules": {
+    "object-curly-spacing": 0,
+    "space-unary-ops": 0
+  }
 }
