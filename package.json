@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "The South Park Downloader",
   "author": "Patrick @bumbummen99",
+  "type": "module",
   "bin": {
     "spdl": "./bin/run"
   },

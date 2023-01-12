@@ -3,6 +3,7 @@
     "declaration": true,
     "importHelpers": true,
     "module": "es2020",
+    "moduleResolution": "node",
     "outDir": "dist",
     "rootDir": "src",
     "strict": true,
@@ -10,5 +11,8 @@
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "ts-node": { 
+    "esm": true
+  }
 }
