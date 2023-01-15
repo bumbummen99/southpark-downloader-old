@@ -1,9 +1,9 @@
 import axios from "axios"
-import {readFileSync} from "fs"
-import {writeFile} from "fs/promises"
-import {resolve} from "path"
-import {Episode} from "./types/Episode"
-import {depsDir} from "./Util"
+import { readFileSync } from "fs"
+import { writeFile } from "fs/promises"
+import { resolve } from 'path'
+import EpisodeFilter from "./episode-filter"
+import { depsDir } from "./util"
 
 export default class Database {
   static baseURL = 'https://bumbummen99.github.io/southpark-downloader/database.json'
@@ -14,8 +14,13 @@ export default class Database {
     this.data = JSON.parse(readFileSync(resolve(depsDir(), 'database.json')).toString())
   }
 
-  getEpisodes(filter?: EpisodesFilter): Episode[] {
-    return filter ? this.data.filter((value, index, array) => filter(value, index, array)) : this.data
+  getEpisodes(filters?: EpisodeFilter[]): Episode[] {
+    if (filters) {
+      /* Filter episodes to those that match any of the provided filters */
+      return this.data.filter((episode: Episode) => filters.some((filter: EpisodeFilter) => filter.match(episode)));
+    }
+
+    return this.data;
   }
 }
 
