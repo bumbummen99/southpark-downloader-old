@@ -1,0 +1,1 @@
+alias spdl='[ -f spdl ] && sh spdl || sh bin/dev'
