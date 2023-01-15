@@ -1,1 +1,7 @@
-alias spdl='[ -f docker-compose.yml ] && docker compose run --rm spdl || echo "spdl must be run next to docker-compose.yml!"'
+function spdl() {
+    if [ -f ./docker-compose.yml ]; then
+        docker compose run --rm spdl "$@"
+    else
+        echo "spdl must be run next to docker-compose.yml!"
+    fi
+}
