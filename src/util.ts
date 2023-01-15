@@ -1,13 +1,8 @@
-import {dirname, join, resolve} from 'node:path'
-import {fileURLToPath} from 'node:url'
+import { resolve } from 'node:path'
 import EpisodeFilter from './episode-filter'
 
-export function rootDir(): string {
-  return dirname(fileURLToPath(import.meta.url))
-}
-
 export function dataDir(): string {
-  return resolve(join(rootDir(), '../data'))
+  return resolve('/data')
 }
 
 export function parseFilterString(input: string): EpisodeFilter[] {
@@ -18,7 +13,7 @@ export function parseFilterString(input: string): EpisodeFilter[] {
     const [match, season, episode, toSeason, toEpisode] = /^S(\d{2})(?:E(\d{2}))?(?:-S(\d{2})(?:E(\d{2}))?)?$/.exec(input) || []
 
     /* Verify that the provided filter is well formed */
-    if (! match) {
+    if (!match) {
       throw new Error(`The provided episode filter '${filter}' is invalid. Filters have to be one of the following formats S00E00 (episode), S00 (season), S00E00-S00E00 (range), S00-S00E00 (range)`)
     }
 
