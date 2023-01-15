@@ -1,9 +1,9 @@
-import axios from "axios"
-import { readFileSync } from "fs"
-import { writeFile } from "fs/promises"
-import { resolve } from 'path'
-import EpisodeFilter from "./episode-filter"
-import { depsDir } from "./util"
+import axios from 'axios'
+import { readFileSync } from 'node:fs'
+import { writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
+import EpisodeFilter from './episode-filter'
+import { depsDir } from './util'
 
 export default class Database {
   static baseURL = 'https://bumbummen99.github.io/southpark-downloader/database.json'
