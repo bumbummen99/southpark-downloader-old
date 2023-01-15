@@ -8,18 +8,22 @@ import { dataDir } from './util'
 export const databaseFilePath = resolve(dataDir(), 'database.json')
 
 export default class Database {
-  static baseURL = 'https://bumbummen99.github.io/southpark-downloader/database.json'
+  static url = 'https://bumbummen99.github.io/southpark-downloader/database.json'
 
   private data: Episode[] = []
 
   /**
    * Loads the database from the JSON datafile.
    * @param sync Force sync the database with the repository (i.e. update)
+   * @returns Promise <void>
    */
   public async load(sync = false): Promise<void> {
     /* Sync database with the repo in case we are forced to or the database does not exist locally */
     if (sync || existsSync(databaseFilePath)) {
-      // Load database from the repository
+      /* Load the database from the repository and overwrite the local file */
+      await writeFile(databaseFilePath, await axios.get(Database.url, {
+        responseType: 'json',
+      }))
     }
 
     /* Load the local database file */
@@ -34,15 +38,4 @@ export default class Database {
 
     return this.data
   }
-}
-
-/**
- * Sync the local database with the database from the GitHub repository
- */
-export async function sync(url: string = Database.baseURL): Promise<void> {
-  const response = await axios.get(url, {
-    responseType: 'json',
-  })
-
-  await writeFile(databaseFilePath, JSON.stringify(response.data))
 }

@@ -23,14 +23,14 @@ RUN mkdir ffmpeg-download && \
     mv ffmpeg-download/bin/* /usr/local/bin/ && \
     rm -R ffmpeg-download
 
+# Install ts-node globally
+RUN npm i -g ts-node
+
 # Create application diectory
 RUN mkdir /app
 
 # Set working directory of the image to the application directory
 WORKDIR /app
-
-# Run the application
-ENTRYPOINT [ "spdl" ]
 
 # Download by default
 CMD [ "download" ]
@@ -43,6 +43,9 @@ FROM dependencies as development
 # Mount the local build
 VOLUME /app
 
+# Run the application in dev
+ENTRYPOINT [ "bin/dev.js" ]
+
 ##############
 # Production #
 ##############
@@ -50,3 +53,6 @@ FROM dependencies as production
 
 # Add the local build
 COPY dist /app
+
+# Run the application in pord
+ENTRYPOINT [ "bin/run.js" ]

@@ -1,1 +1,1 @@
-alias spdl='[ -f spdl ] && sh spdl || sh bin/dev'
+alias spdl='[ -f docker-compose.yml ] && docker compose run --rm spdl || echo "spdl must be run next to docker-compose.yml!"'
