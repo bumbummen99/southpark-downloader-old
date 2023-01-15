@@ -14,7 +14,15 @@ export default class Database {
     this.data = JSON.parse(readFileSync(resolve(depsDir(), 'database.json')).toString())
   }
 
-  getEpisodes(filters?: EpisodeFilter[]): Episode[] {
+  /**
+   * Loads the database from the JSON datafile.
+   * @param sync Force sync the database with the repository (i.e. update)
+   */
+  public async load(sync: boolean = false): Promise<void> {
+    // Download DB
+  }
+
+  public getEpisodes(filters?: EpisodeFilter[]): Episode[] {
     if (filters) {
       /* Filter episodes to those that match any of the provided filters */
       return this.data.filter((episode: Episode) => filters.some((filter: EpisodeFilter) => filter.match(episode)));
