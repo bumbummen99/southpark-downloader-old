@@ -44,7 +44,7 @@ FROM dependencies as development
 VOLUME /app
 
 # Run the application in dev
-ENTRYPOINT [ "/app/bin/dev.js" ]
+ENTRYPOINT [ "node", "/app/bin/dev.js" ]
 
 ##############
 # Production #
@@ -55,4 +55,4 @@ FROM dependencies as production
 COPY dist /app
 
 # Run the application in pord
-ENTRYPOINT [ "/app/index.js" ]
+ENTRYPOINT [ "node", "/app/index.js" ]
