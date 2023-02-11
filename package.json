@@ -5,7 +5,7 @@
   "author": "Patrick @bumbummen99",
   "type": "module",
   "bin": {
-    "spdl": "./bin/run"
+    "spdl": "./bin/run.js"
   },
   "homepage": "https://github.com/bumbummen99/southpark-downloader",
   "license": "MIT",
